@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario</title>
+</head>
+
+<body>
+    <form id="miFormulario">
+        <!-- <input type="text" id="nombre" placeholder="Nombre">
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <textarea id="comentario" placeholder="Comentario"></textarea>
+        <select id="opcion" placeholder="Opción">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+        </select> -->
+        <button type="button" id="guardar">Guardar Respuestas</button>
+    </form>
+
+    <script>
+        document.getElementById('guardar').addEventListener('click', function () {
+            // const nombre = document.getElementById('nombre').value;
+            // const email = document.getElementById('email').value;
+            // const comentario = document.getElementById('comentario').value;
+            // const opcion = document.getElementById('opcion').value;
+
+            // const respuestas = {
+            //     nombre: nombre,
+            //     email: email,
+            //     comentario: comentario,
+            //     opcion: opcion
+            // };
+
+            const userData = {
+                "electricityResponses": {
+                    "records": [
+                        {
+                            "receiptNumber": 1,
+                            "kWhConsumption": 150
+                        },
+                        {
+                            "receiptNumber": 2,
+                            "kWhConsumption": 220
+                        },
+                        {
+                            "receiptNumber": 3,
+                            "kWhConsumption": 180
+                        },
+                        {
+                            "receiptNumber": 4,
+                            "kWhConsumption": 250
+                        },
+                        {
+                            "receiptNumber": 5,
+                            "kWhConsumption": 200
+                        },
+                        {
+                            "receiptNumber": 6,
+                            "kWhConsumption": 190
+                        }
+                    ]
+                },
+                "waterResponses": {
+                    "records": [
+                        {
+                            "receiptNumber": 1,
+                            "m3Consumption": 5
+                        },
+                        {
+                            "receiptNumber": 2,
+                            "m3Consumption": 6
+                        },
+                        {
+                            "receiptNumber": 3,
+                            "m3Consumption": 7
+                        },
+                        {
+                            "receiptNumber": 4,
+                            "m3Consumption": 8
+                        },
+                        {
+                            "receiptNumber": 5,
+                            "m3Consumption": 9
+                        },
+                        {
+                            "receiptNumber": 6,
+                            "m3Consumption": 10
+                        }
+                    ]
+                },
+                "gasResponses": {
+                    "naturalGasConsumption": 1200,
+                    "LPGConsumption": 300
+                },
+                "transportResponses": {
+                    "vehicles": [
+                        {
+                            "noVehicle": 1,
+                            "kmsDriven": 12000,
+                            "efficiency": 0.15,
+                            "isDiesel": "false"
+                        },
+                        {
+                            "noVehicle": 2,
+                            "kmsDriven": 8000,
+                            "efficiency": 0.12,
+                            "isDiesel": "true"
+                        }
+                    ]
+                }
+            };
+
+
+            const userDataJSON = JSON.stringify(userData);
+
+            window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
+        });
+    </script>
+</body>
+
+</html>

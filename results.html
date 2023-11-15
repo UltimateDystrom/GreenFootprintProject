@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+
+    <style>
+        body {
+            background-color: #22663f;
+            background-size: cover;
+        }
+
+        .centered-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background-color: #343a40;
+            color: #fed136;
+            margin: 2em; 
+        } 
+
+        .card-header {
+            color: #fed136;
+        }
+
+        .py-plot {
+            width: 100%;
+            height: auto;
+        }
+
+        #pyscript_loading_splash {
+            background-color: #22663f;
+        }
+    </style>
+</head>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
+
+    <div class="container">
+        <!-- <div id="pyscript_loading_splash" class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-600 opacity-75 flex flex-col items-center justify-center">
+            <div class="smooth spinner"></div>
+            <div id="pyscript-loading-label" class="label">
+                <div id="pyscript-operation-details">
+                    <p>Cargando</p>
+                </div>
+            </div>
+        </div> -->
+
+
+        <!--Python Libraries-->
+        <py-config>
+            packages = ['pandas', 'matplotlib', 'numpy']
+        </py-config>
+
+        <h1 style="text-align: center;">¡Aquí están tus resultados!</h1>
+
+        <div class="centered-content">
+
+            <div class="card text-center" , id="electricity-card">
+                <div class="card-header">
+                    Electricidad
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Resultados de Electricidad</h5>
+                    <div class="py-plot">
+                        <py-script>
+                            import pandas as pd
+                            import matplotlib.pyplot as plt
+                            import numpy as np
+                            from js import location, URLSearchParams
+                            import json
+
+                            urlParams = URLSearchParams.new(location.search)
+                            userDataJSON = urlParams.get('respuestas')
+
+                            userData = json.loads(userDataJSON)
+
+                            electricity_data = userData["electricityResponses"]["records"]
+                            df_electricity = pd.DataFrame(electricity_data)
+                            df_electricity = df_electricity.rename(columns={"receiptNumber": "receipt",
+                            "kWhConsumption":
+                            "consume_kwh"})
+
+                            df_electricity["consume_mwh"] = df_electricity["consume_kwh"] / 1000
+
+                            emissionFactorElectrity = 0.435
+
+                            df_electricity["emission_tco2"] = df_electricity["consume_mwh"] * emissionFactorElectrity
+                            emissionResultElectricity = df_electricity["consume_mwh"].sum() * emissionFactorElectrity
+
+                            plt.clf()
+                            plt.figure(facecolor="#a9a9a9")
+                            plt.plot(df_electricity["receipt"], df_electricity["consume_mwh"])
+                            plt.title("Consumo anual de electricidad")
+                            plt.xlabel("No. de recibo bimestral")
+                            plt.ylabel("Consumo bimestral de electricidad (MWh)")
+                            display(plt)
+
+                            plt.clf()
+                            plt.bar(df_electricity["receipt"], df_electricity["emission_tco2"])
+                            plt.title("Emisión de carbono anual de electricidad")
+                            plt.xlabel("Consumo de electricidad bimestral (MWh)")
+                            plt.ylabel("Emisión bimestral de carbono (tco2)")
+                            display(plt)
+
+                            Element("electricityFactorResult").write("{:.2f} tCO2".format(emissionResultElectricity))
+                        </py-script>
+                    </div>
+                    <p class="card-text">Emisión de Electricidad:</p>
+                    <p class="card-text" id="electricityFactorResult"></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="centered-content">
+            <div class="card text-center" , id="electricity-card">
+                <div class="card-header">
+                    Agua
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Resultados de Agua</h5>
+                    <div class="py-plot">
+                        <py-script>
+                            import pandas as pd
+                            import matplotlib.pyplot as plt
+                            import numpy as np
+                            from js import location, URLSearchParams
+                            import json
+
+                            urlParams = URLSearchParams.new(location.search)
+                            userDataJSON = urlParams.get('respuestas')
+
+                            userData = json.loads(userDataJSON)
+
+                            water_data = userData["waterResponses"]["records"]
+                            df_water = pd.DataFrame(water_data)
+                            df_water = df_water.rename(columns={"receiptNumber": "receipt", "m3Consumption":
+                            "consume_m3"})
+
+                            emissionFactorWater = 0.26 / 1000
+
+                            df_water["emission_tco2"] = df_water["consume_m3"] * emissionFactorWater
+                            emissionResultWater = df_water["consume_m3"].sum() * emissionFactorWater
+
+                            plt.clf()
+                            plt.plot(df_water["receipt"], df_water["consume_m3"])
+                            plt.title("Consumo anual de agua")
+                            plt.xlabel("No. de recibo bimestral")
+                            plt.ylabel("Consumo bimestral de agua (m^3)")
+                            display(plt)
+
+                            plt.clf()
+                            plt.bar(df_water["receipt"], df_water["emission_tco2"])
+                            plt.title("Emisión de carbono anual de agua")
+                            plt.xlabel("Consumo de agua bimestral (m^3)")
+                            plt.ylabel("Emisión bimestral de carbono (tco2)")
+                            display(plt)
+                            
+                            Element("waterFactorResult").write("{:.2f} tCO2".format(emissionResultWater))
+                        </py-script>
+                    </div>
+                    <p class="card-text">Emisión de Agua:</p>
+                    <p class="card-text" id="waterFactorResult"></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="centered-content">
+            <div class="card text-center" , id="electricity-card">
+                <div class="card-header">
+                    Gas
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Resultados de Gas</h5>
+                    <div class="py-plot">
+                        <py-script>
+                            import pandas as pd
+                            import matplotlib.pyplot as plt
+                            import numpy as np
+                            from js import location, URLSearchParams
+                            import json
+
+                            urlParams = URLSearchParams.new(location.search)
+                            userDataJSON = urlParams.get('respuestas')
+
+                            userData = json.loads(userDataJSON)
+
+                            gas_data = userData["gasResponses"]
+                            df_gas = pd.DataFrame([gas_data])
+                            df_gas = df_gas.rename(columns={"naturalGasConsumption": "consume_natural_gas",
+                            "LPGConsumption":
+                            "consume_lp_gas"})
+
+                            emissionFactorNaturalGas = 2.2161 / 1000
+                            emissionFactorLPGas = 2.5868 / 1000
+
+                            df_gas["emission_tco2_natural_gas"] = df_gas["consume_natural_gas"] * emissionFactorNaturalGas
+                            emissionResultNaturalGas = df_gas["consume_natural_gas"].sum() * emissionFactorNaturalGas
+
+                            df_gas["emission_tco2_lp_gas"] = df_gas["consume_lp_gas"] * emissionFactorLPGas
+                            emissionResultLPGas = df_gas["consume_lp_gas"].sum() * emissionFactorLPGas
+
+                            lblsGas = ["Gas Natural", "Gas LP"]
+
+                            plt.clf()
+                            gasVals = list(df_gas["consume_natural_gas"]) + list(df_gas["consume_lp_gas"])
+                            plt.pie(gasVals, labels=lblsGas, autopct="%1.1f%%")
+                            plt.title("Consumo anual de gas")
+                            display(plt)
+
+                            plt.clf()
+                            gasEmissionVals = list(df_gas["emission_tco2_natural_gas"]) + list(df_gas["emission_tco2_lp_gas"])
+                            plt.bar(lblsGas, gasEmissionVals)
+                            plt.title("Emisión de carbono anual de gas")
+                            plt.xlabel("Tipo de gas")
+                            plt.ylabel("Emisión de carbono (tco2)")
+                            display(plt)
+
+                            Element("naturalGasFactorResult").write("{:.2f} tCO2".format(emissionResultNaturalGas))
+                            Element("LPGasFactorResult").write("{:.2f} tCO2".format(emissionResultLPGas))
+                        </py-script>
+                    </div>
+                    <p class="card-text">Emisión de Gas Natural:</p>
+                    <p class="card-text" id="naturalGasFactorResult"></p>
+                    <p class="card-text">Emisión de Gas LP:</p>
+                    <p class="card-text" id="LPGasFactorResult"></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="centered-content">
+            <div class="card text-center" id="electricity-card">
+                <div class="card-header">
+                    Transporte
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Resultados de Transporte</h5>
+                    <div class="py-plot">
+                        <py-script>
+                            import pandas as pd
+                            import matplotlib.pyplot as plt
+                            import numpy as np
+                            from js import location, URLSearchParams
+                            import json
+
+                            urlParams = URLSearchParams.new(location.search)
+                            userDataJSON = urlParams.get('respuestas')
+
+                            userData = json.loads(userDataJSON)
+
+                            transport_data = userData["transportResponses"]["vehicles"]
+                            df_transport = pd.DataFrame(transport_data)
+                            df_transport["isDiesel"] = df_transport["isDiesel"].map({"true":True, "false":False})
+
+                            emissionFactorFuel = 2.953 / 1000
+                            emissionFactorDiesel = 3.1034 / 1000
+
+                            def calculate_emission(row):
+                                if not row["isDiesel"]:
+                                    return row["kmsDriven"] * row["efficiency"] * emissionFactorFuel
+                                else:
+                                    return row["kmsDriven"] * row["efficiency"] * emissionFactorDiesel
+
+                            df_transport["emission_tco2"] = df_transport.apply(calculate_emission, axis=1)
+                            emissionResultTransport = df_transport["emission_tco2"].sum()
+
+                            plt.clf()
+                            lblsTransport = [i for i in range(1, len(df_transport["noVehicle"])+1)]
+                            plt.bar(lblsTransport, df_transport["emission_tco2"])
+                            plt.title("Emisión de carbono anual de transporte")
+                            plt.xticks(lblsTransport)
+                            plt.xlabel("Carros")
+                            plt.ylabel("Emisión de carbono (tco2)")
+                            display(plt)
+
+                            Element("transportFactorResult").write("{:.2f} tCO2".format(emissionResultTransport))
+                        </py-script>
+                    </div>
+                    <p class="card-text">Emisión de Transporte:</p>
+                    <p class="card-text" id="transportFactorResult"></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="centered-content">
+            <div class="card text-center" id="electricity-card">
+                <div class="card-header">
+                    General
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Resultados Generales</h5>
+                    <div class="py-plot">
+                        <py-script>
+                            import pandas as pd
+                            import matplotlib.pyplot as plt
+                            import numpy as np
+                            from js import location, URLSearchParams
+                            import json
+
+                            urlParams = URLSearchParams.new(location.search)
+                            userDataJSON = urlParams.get('respuestas')
+
+                            userData = json.loads(userDataJSON)
+
+                            electricity_data = userData["electricityResponses"]["records"]
+                            df_electricity = pd.DataFrame(electricity_data)
+                            df_electricity = df_electricity.rename(columns={"receiptNumber": "receipt",
+                            "kWhConsumption":
+                            "consume_kwh"})
+
+                            df_electricity["consume_mwh"] = df_electricity["consume_kwh"] / 1000
+
+                            emissionFactorElectrity = 0.435
+
+                            df_electricity["emission_tco2"] = df_electricity["consume_mwh"] * emissionFactorElectrity
+                            emissionResultElectricity = df_electricity["consume_mwh"].sum() * emissionFactorElectrity
+
+                            water_data = userData["waterResponses"]["records"]
+                            df_water = pd.DataFrame(water_data)
+                            df_water = df_water.rename(columns={"receiptNumber": "receipt", "m3Consumption":
+                            "consume_m3"})
+
+                            emissionFactorWater = 0.26 / 1000
+
+                            df_water["emission_tco2"] = df_water["consume_m3"] * emissionFactorWater
+                            emissionResultWater = df_water["consume_m3"].sum() * emissionFactorWater
+
+                            gas_data = userData["gasResponses"]
+                            df_gas = pd.DataFrame([gas_data])
+                            df_gas = df_gas.rename(columns={"naturalGasConsumption": "consume_natural_gas",
+                            "LPGConsumption":
+                            "consume_lp_gas"})
+
+                            emissionFactorNaturalGas = 2.2161 / 1000
+                            emissionFactorLPGas = 2.5868 / 1000
+
+                            df_gas["emission_tco2_natural_gas"] = df_gas["consume_natural_gas"] * emissionFactorNaturalGas
+                            emissionResultNaturalGas = df_gas["consume_natural_gas"].sum() * emissionFactorNaturalGas
+
+                            df_gas["emission_tco2_lp_gas"] = df_gas["consume_lp_gas"] * emissionFactorLPGas
+                            emissionResultLPGas = df_gas["consume_lp_gas"].sum() * emissionFactorLPGas
+
+                            transport_data = userData["transportResponses"]["vehicles"]
+                            df_transport = pd.DataFrame(transport_data)
+                            df_transport["isDiesel"] = df_transport["isDiesel"].map({"true":True, "false":False})
+
+                            emissionFactorFuel = 2.953 / 1000
+                            emissionFactorDiesel = 3.1034 / 1000
+
+                            def calculate_emission(row):
+                                if not row["isDiesel"]:
+                                    return row["kmsDriven"] * row["efficiency"] * emissionFactorFuel
+                                else:
+                                    return row["kmsDriven"] * row["efficiency"] * emissionFactorDiesel
+
+                            df_transport["emission_tco2"] = df_transport.apply(calculate_emission, axis=1)
+                            emissionResultTransport = df_transport["emission_tco2"].sum()
+
+                            plt.clf()
+                            emissionResults = [emissionResultElectricity, emissionResultNaturalGas, emissionResultLPGas,
+                            emissionResultWater, emissionResultTransport]
+                            lblsResults = ["Electricidad", "Gas Natural", "Gas LP", "Agua", "Transporte"]
+                            plt.figure(figsize=(10,10), facecolor="#a9a9a9")
+                            plt.pie(emissionResults, labels=lblsResults, autopct="%1.1f%%")
+                            plt.title("Emisiones de carbono")
+                            display(plt)
+
+                            emissionUserResult = emissionResultElectricity + emissionResultWater + emissionResultNaturalGas + emissionResultLPGas + emissionResultTransport
+                            Element("userFactorResult").write("{:.2f} tCO2".format(emissionUserResult))
+                        </py-script>
+                    </div>
+                    <p class="card-text">Emisión Total:</p>
+                    <p class="card-text" id="userFactorResult"></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-success btn-xl text-uppercase" id="goMainMenuButton" style="background-color: #343a40;">IR AL MENÚ PRINCIPAL</button>
+        </div>
+
+        <script>
+            document.getElementById("goMainMenuButton").addEventListener("click", function () {
+                var url = "/index.html"
+                window.location.href = url;
+            });
+        </script>
+    </div>
+
+
+</body>
+
+</html>

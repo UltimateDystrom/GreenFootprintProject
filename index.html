@@ -9,30 +9,30 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var navbarContainer = document.getElementById("navbarContainer");
+            var navbarContent = document.getElementById("navbarContent");
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "navbar.html", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    navbarContent.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
+    </script>
 </head>
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
-    <nav class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark" id="mainNav">
-        
-        <div class="container">
-            <a class="navbar-brand" href="#page-top">Green Footprint</a>
-            <button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto text-uppercase">
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">Test</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   <div id="navbarContainer"></div>
+   <div id="navbarContent"></div>
+
     <header class="masthead" style="background-image: url('assets/img/wallpaper.jpg');">
         <div class="container">
             <div class="intro-text">
-                <!-- <div class="intro-lead-in"><span>Welcome To Our Studio!</span></div> -->
                 <div class="intro-heading text-uppercase"><span>¿Qué es la Huella de Carbono?</span></div>
             </div>
         </div>
@@ -86,7 +86,7 @@
 
     <!----------------- TEST  ------------------>
 
-    <section class="bg-light" id="portfolio" style="background-image: url('assets/img/Balcony\ Screen\ Yellow\ 90x400\ cm\ Oxford\ Fabric.jpg');">
+    <section class="bg-light" id="test" style="background-image: url('assets/img/Balcony\ Screen\ Yellow\ 90x400\ cm\ Oxford\ Fabric.jpg');">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -160,8 +160,15 @@
 
                 <div class="col-lg-12 text-center">
                     <br><br>
-                    <div id="success"></div><button class="btn btn-success btn-xl text-uppercase">IR AL TEST</button>
+                    <div id="success"></div><button class="btn btn-success btn-xl text-uppercase" id="startTestButton">IR AL TEST</button>
                 </div>
+
+                <script>
+                    document.getElementById("startTestButton").addEventListener("click", function(){
+                        var url = "/form.html"
+                        window.location.href= url;
+                    });
+                </script>
             </div>
         </div>
     </section>    
