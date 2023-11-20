@@ -2,120 +2,527 @@
 <html>
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <title>Formulario</title>
+    <style>
+        h2,
+        h4,
+        p {
+
+            text-align: center;
+
+        }
+
+        .pad {
+
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            padding-bottom: 5px;
+
+        }
+
+        #miFormulario {
+
+            display: block;
+
+        }
+
+        .padding {
+
+            padding: 5px;
+
+        }
+    </style>
 </head>
 
 <body>
-    <form id="miFormulario">
-        <!-- <input type="text" id="nombre" placeholder="Nombre">
-        <input type="email" id="email" placeholder="Correo electrónico">
-        <textarea id="comentario" placeholder="Comentario"></textarea>
-        <select id="opcion" placeholder="Opción">
-            <option value="opcion1">Opción 1</option>
-            <option value="opcion2">Opción 2</option>
-        </select> -->
-        <button type="button" id="guardar">Guardar Respuestas</button>
-    </form>
+
+    <div class="container pad" style="background-color: rgb(109, 109, 109);">
+
+        <div class="padding"></div>
+
+        <div class="container" style="background-color: rgb(202, 202, 202);">
+
+            <h2>Test de 'Huella de Carbono'</h2>
+            <p style="text-align: justify;">Calcular la huella de carbono de un individuo implica considerar todas las
+                actividades que generan emisiones de gases de efecto invernadero (GEI) directa o indirectamente. A
+                continuación, te proporcionamos una guía básica para calcular tu huella de carbono: </p>
+
+        </div>
+
+        <div class="container" style="background-color: rgb(82, 82, 82);">
+
+            <div class="padding"></div>
+
+            <form>
+
+                <div class="container" style="background-color: rgb(255, 255, 255);">
+
+                    <h4>Electricidad</h4>
+                    <p>Da el consumo en kWh de los 6 recibos al año de tu consumo: </p>
+
+                    <div style="text-align: center;">
+
+
+                        <input id="electricity1" style="width: 75px;" placeholder="KWh (#1)">
+                        <input id="electricity2" style="width: 75px;" placeholder="KWh (#2)">
+                        <input id="electricity3" style="width: 75px;" placeholder="KWh (#3)">
+                        <input id="electricity4" style="width: 75px;" placeholder="KWh (#4)">
+                        <input id="electricity5" style="width: 75px;" placeholder="KWh (#5)">
+                        <input id="electricity6" style="width: 75px;" placeholder="KWh (#6)">
+
+
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <div class="padding"></div>
+
+                <div class="container" style="background-color: rgb(255, 255, 255);">
+
+                    <h4>Agua</h4>
+                    <p>Da el consumo de litros o m3 de los 6 recibos al año de tu consumo: </p>
+
+                    <div style="text-align: center;">
+
+                        <input id="water1" style="width: 85px;" placeholder="m3 | L (#1)">
+                        <input id="water2" style="width: 85px;" placeholder="m3 | L (#2)">
+                        <input id="water3" style="width: 85px;" placeholder="m3 | L (#3)">
+                        <input id="water4" style="width: 85px;" placeholder="m3 | L (#4)">
+                        <input id="water5" style="width: 85px;" placeholder="m3 | L (#5)">
+                        <input id="water6" style="width: 85px;" placeholder="m3 | L (#6)">
+
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <div class="padding"></div>
+
+                <div class="container" style="background-color: rgb(255, 255, 255);">
+
+                    <h4>Gas</h4>
+                    <p>¿Qué tipo de gas utiliza?</p>
+
+                    <div style="text-align: center;">
+
+                        <div id="gasInputs" style="text-align: center;">
+                            <p>Consumo anual de Gas Natural (en L):</p>
+                            <input id="naturalGas" style="width: 85px;" placeholder="L (Año)" value="0">
+
+                            <p>Consumo anual de Gas LP (en L):</p>
+                            <input id="lpg" style="width: 85px;" placeholder="L (Año)" value="0">
+                        </div>
+
+                    </div>
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+
+                <div style="text-align: center;">
+
+
+                </div>
+
+                <div class="padding"></div>
+
+        </div>
+
+        <div class="padding"></div>
+
+        <div class="container" style="background-color: rgb(255, 255, 255);">
+
+            <h4>Transporte</h4>
+            <p>¿Cuántos carros tiene a disposición?</p>
+
+            <div style="text-align: center;">
+
+                <select id="numVehicles">
+
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+
+                <div class="padding"></div>
+
+            </div>
+
+            <!-- #1 -->
+
+            <div id="vehicle1" class="vehicle-info">
+                <p style="opacity: 0.5;">----- #1 -----</p>
+
+                <p>¿Qué tipo de gasolina usa?</p>
+
+                <div style="text-align: center;">
+
+                    <select id="fuelType1">
+                        <option value="g">Gasolina</option>
+                        <option value="d">Diésel</option>
+                    </select>
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <p>Da el consumo de kilometraje de cada vehículo anualmente y cuánto consume de litros de gasolina por
+                    kilómetro: </p>
+
+                <div style="text-align: center;">
+
+                    <p>Consumo de litros de gasolina por kilómetro:</p>
+                    <div style="text-align: center;">
+                        <input id="fuelConsumptionPerKm1" style="width: 60px;" placeholder="L/Km">
+                    </div>
+
+                    <p>Consumo anual de gasolina en litros:</p>
+                    <div style="text-align: center;">
+                        <input id="annualConsumption1" style="width: 60px;" placeholder="L (Año)">
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+
+            </div>
+
+            <!-- -->
+
+            <!-- #2 -->
+
+            <div id="vehicle2" class="vehicle-info">
+                <p style="opacity: 0.5;">----- #2 -----</p>
+
+                <p>¿Qué tipo de gasolina usa?</p>
+
+                <div style="text-align: center;">
+
+                    <select id="fuelType2">
+                        <option value="g">Gasolina</option>
+                        <option value="d">Diésel</option>
+                    </select>
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <p>Da el consumo de kilometraje de cada vehículo anualmente y cuánto consume de litros de gasolina por
+                    kilómetro: </p>
+
+                <div style="text-align: center;">
+
+                    <p>Consumo de litros de gasolina por kilómetro:</p>
+                    <div style="text-align: center;">
+                        <input id="fuelConsumptionPerKm2" style="width: 60px;" placeholder="L/Km">
+                    </div>
+
+                    <p>Consumo anual de gasolina en litros:</p>
+                    <div style="text-align: center;">
+                        <input id="annualConsumption2" style="width: 60px;" placeholder="L (Año)">
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+            </div>
+
+            <!-- -->
+
+            <!-- #3 -->
+
+            <div id="vehicle3" class="vehicle-info">
+                <p style="opacity: 0.5;">----- #3 -----</p>
+
+                <p>¿Qué tipo de gasolina usa?</p>
+
+                <div style="text-align: center;">
+
+                    <select id="fuelType3">
+                        <option value="g">Gasolina</option>
+                        <option value="d">Diésel</option>
+                    </select>
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <p>Da el consumo de kilometraje de cada vehículo anualmente y cuánto consume de litros de gasolina por
+                    kilómetro: </p>
+
+                <div style="text-align: center;">
+
+                    <p>Consumo de litros de gasolina por kilómetro:</p>
+                    <div style="text-align: center;">
+                        <input id="fuelConsumptionPerKm3" style="width: 60px;" placeholder="L/Km">
+                    </div>
+
+                    <p>Consumo anual de gasolina en litros:</p>
+                    <div style="text-align: center;">
+                        <input id="annualConsumption3" style="width: 60px;" placeholder="L (Año)">
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+            </div>
+            <!-- -->
+
+            <!-- #4 -->
+            <div id="vehicle4" class="vehicle-info">
+                <p style="opacity: 0.5;">----- #4 -----</p>
+
+                <p>¿Qué tipo de gasolina usa?</p>
+
+                <div style="text-align: center;">
+
+                    <select id="fuelType4">
+                        <option value="g">Gasolina</option>
+                        <option value="d">Diésel</option>
+                    </select>
+
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <p>Da el consumo de kilometraje de cada vehículo anualmente y cuánto consume de litros de gasolina por
+                    kilómetro: </p>
+
+                <div style="text-align: center;">
+
+                    <p>Consumo de litros de gasolina por kilómetro:</p>
+                    <div style="text-align: center;">
+                        <input id="fuelConsumptionPerKm4" style="width: 60px;" placeholder="L/Km">
+                    </div>
+
+                    <p>Consumo anual de gasolina en litros:</p>
+                    <div style="text-align: center;">
+                        <input id="annualConsumption4" style="width: 60px;" placeholder="L (Año)">
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+            </div>
+            <!-- -->
+
+            <!-- #5 -->
+
+            <div id="vehicle5" class="vehicle-info">
+                <p style="opacity: 0.5;">----- #5 -----</p>
+
+                <p>¿Qué tipo de gasolina usa?</p>
+
+                <div style="text-align: center;">
+
+                    <select id="fuelType5">
+                        <option value="g">Gasolina</option>
+                        <option value="d">Diésel</option>
+                    </select>
+
+
+                    <div class="padding"></div>
+
+                </div>
+
+                <p>Da el consumo de kilometraje de cada vehículo anualmente y cuánto consume de litros de gasolina por
+                    kilómetro: </p>
+
+                <div style="text-align: center;">
+
+                    <p>Consumo de litros de gasolina por kilómetro:</p>
+                    <div style="text-align: center;">
+                        <input id="fuelConsumptionPerKm5" style="width: 60px;" placeholder="L/Km">
+                    </div>
+
+                    <p>Consumo anual de gasolina en litros:</p>
+                    <div style="text-align: center;">
+                        <input id="annualConsumption5" style="width: 60px;" placeholder="L (Año)">
+                    </div>
+
+                    <div class="padding"></div>
+
+                </div>
+            </div>
+            <!-- -->
+
+        </div>
+
+        <div class="padding"></div>
+
+        <div style="text-align: center; padding-bottom: 10px;">
+
+            <button type="button" id="guardar">Guardar Respuestas</button>
+
+        </div>
+
+        </form>
+
+    </div>
+
+    </div>
 
     <script>
-        document.getElementById('guardar').addEventListener('click', function () {
-            // const nombre = document.getElementById('nombre').value;
-            // const email = document.getElementById('email').value;
-            // const comentario = document.getElementById('comentario').value;
-            // const opcion = document.getElementById('opcion').value;
 
-            // const respuestas = {
-            //     nombre: nombre,
-            //     email: email,
-            //     comentario: comentario,
-            //     opcion: opcion
-            // };
-
-            const userData = {
-                "electricityResponses": {
-                    "records": [
-                        {
-                            "receiptNumber": 1,
-                            "kWhConsumption": 150
-                        },
-                        {
-                            "receiptNumber": 2,
-                            "kWhConsumption": 220
-                        },
-                        {
-                            "receiptNumber": 3,
-                            "kWhConsumption": 180
-                        },
-                        {
-                            "receiptNumber": 4,
-                            "kWhConsumption": 250
-                        },
-                        {
-                            "receiptNumber": 5,
-                            "kWhConsumption": 200
-                        },
-                        {
-                            "receiptNumber": 6,
-                            "kWhConsumption": 190
-                        }
-                    ]
-                },
-                "waterResponses": {
-                    "records": [
-                        {
-                            "receiptNumber": 1,
-                            "m3Consumption": 5
-                        },
-                        {
-                            "receiptNumber": 2,
-                            "m3Consumption": 6
-                        },
-                        {
-                            "receiptNumber": 3,
-                            "m3Consumption": 7
-                        },
-                        {
-                            "receiptNumber": 4,
-                            "m3Consumption": 8
-                        },
-                        {
-                            "receiptNumber": 5,
-                            "m3Consumption": 9
-                        },
-                        {
-                            "receiptNumber": 6,
-                            "m3Consumption": 10
-                        }
-                    ]
-                },
-                "gasResponses": {
-                    "naturalGasConsumption": 1200,
-                    "LPGConsumption": 300
-                },
-                "transportResponses": {
-                    "vehicles": [
-                        {
-                            "noVehicle": 1,
-                            "kmsDriven": 12000,
-                            "efficiency": 0.15,
-                            "isDiesel": "false"
-                        },
-                        {
-                            "noVehicle": 2,
-                            "kmsDriven": 8000,
-                            "efficiency": 0.12,
-                            "isDiesel": "true"
-                        }
-                    ]
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeVehicleDisplay();
+            document.getElementById('numVehicles').addEventListener('change', function () {
+                var numVehicles = parseInt(this.value);
+                var vehicleInfos = document.getElementsByClassName('vehicle-info');
+                for (var i = 0; i < vehicleInfos.length; i++) {
+                    vehicleInfos[i].style.display = 'none';
                 }
-            };
+                if (numVehicles === 0) {
+                    for (let i = 1; i <= 5; i++) {
+                        document.getElementById('annualConsumption' + i).value = 0;
+                        document.getElementById('fuelConsumptionPerKm' + i).value = 0;
+                    }
+                    return;
+                }
+                // Muestra la cantidad seleccionada de campos de vehículos
+                for (var i = 1; i <= numVehicles; i++) {
+                    document.getElementById('vehicle' + i).style.display = 'block';
+                }
+            });
 
 
-            const userDataJSON = JSON.stringify(userData);
 
-            window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
+
+
+
+
+
+
+            // CAPTURA DE DATOS
+
+            document.getElementById('guardar').addEventListener('click', function () {
+                const userData = {
+                    "electricityResponses": { "records": [] },
+                    "waterResponses": { "records": [] },
+                    "gasResponses": {},
+                    "transportResponses": { "vehicles": [] }
+                };
+                console.log("holi")
+
+
+                // Captura los datos de Electricidad
+                for (let i = 1; i <= 6; i++) {
+                    userData.electricityResponses.records.push({
+                        "receiptNumber": i,
+                        "kWhConsumption": parseInt(document.getElementById('electricity' + i).value) || 0
+                    });
+                }
+
+                // Captura los datos de Agua
+                for (let i = 1; i <= 6; i++) {
+                    userData.waterResponses.records.push({
+                        "receiptNumber": i,
+                        "m3Consumption": parseInt(document.getElementById('water' + i).value) || 0
+                    });
+                }
+
+                //Captura los datos de Gas
+                userData.gasResponses.naturalGasConsumption = parseInt(document.getElementById('naturalGas').value) || 0;
+                userData.gasResponses.LPGConsumption = parseInt(document.getElementById('lpg').value) || 0;
+
+
+                // Captura los datos de Transporte
+                var numVehicles = parseInt(document.getElementById('numVehicles').value);
+
+                for (let i = 1; i <= numVehicles; i++) {
+                    var fuelType = document.getElementById('fuelType' + i).value === 'd'; // true si es diésel, false si no
+                    var annualConsumption = parseInt(document.getElementById('annualConsumption' + i).value) || 0;
+                    var fuelConsumptionPerKm = parseFloat(document.getElementById('fuelConsumptionPerKm' + i).value) || 0;
+
+                    userData.transportResponses.vehicles.push({
+                        "noVehicle": i,
+                        "isDiesel": fuelType,
+                        "kmsDriven": annualConsumption,
+                        "efficiency": fuelConsumptionPerKm
+                    });
+                }
+
+                const userDataJSON = JSON.stringify(userData);
+                console.log("hola");
+                console.log(userDataJSON);
+                window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
+            });
+
+
+
+
+
+
+
+
+
+            document.getElementById('gasType').addEventListener('change', function () {
+                var gasType = this.value;
+                if (gasType == 'natural') {
+                    document.getElementById('naturalGasInput').style.display = 'block';
+                    document.getElementById('lpGasInput').style.display = 'none';
+                } else if (gasType == 'lp') {
+                    document.getElementById('naturalGasInput').style.display = 'none';
+                    document.getElementById('lpGasInput').style.display = 'block';
+                }
+            });
+
+            function initializeVehicleDisplay() {
+                var numVehicles = parseInt(document.getElementById('numVehicles').value);
+
+
+                for (var i = 1; i <= 5; i++) {
+                    document.getElementById('annualConsumption' + i).value = 0;
+                    document.getElementById('fuelConsumptionPerKm' + i).value = 0;
+                    document.getElementById('vehicle' + i).style.display = 'none';
+                }
+
+
+                for (var i = 1; i <= numVehicles; i++) {
+                    document.getElementById('vehicle' + i).style.display = 'block';
+                }
+            }
+
+            document.getElementById('numVehicles').addEventListener('change', function () {
+                var numVehicles = parseInt(this.value);
+
+                for (var i = 1; i <= 5; i++) {
+                    document.getElementById('annualConsumption' + i).value = 0;
+                    document.getElementById('fuelConsumptionPerKm' + i).value = 0;
+                    document.getElementById('vehicle' + i).style.display = 'none';
+                }
+
+                for (var i = 1; i <= numVehicles; i++) {
+                    document.getElementById('vehicle' + i).style.display = 'block';
+                }
+            });
+
+
+
         });
+
     </script>
+
+
 </body>
 
 </html>
