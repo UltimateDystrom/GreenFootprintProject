@@ -74,9 +74,7 @@
 
             urlParams = URLSearchParams.new(location.search)
             userDataJSON = urlParams.get('respuestas')
-
             userData = json.loads(userDataJSON)
-
             electricity_data = userData["electricityResponses"]["records"]
             df_electricity = pd.DataFrame(electricity_data)
             df_electricity = df_electricity.rename(columns={"receiptNumber": "receipt",
@@ -91,21 +89,24 @@
             emissionResultElectricity = df_electricity["consume_mwh"].sum() * emissionFactorElectrity
 
             plt.clf()
-            plt.figure(facecolor="#a9a9a9")
-            plt.plot(df_electricity["receipt"], df_electricity["consume_mwh"])
-            plt.title("Consumo anual de electricidad")
-            plt.xlabel("No. de recibo bimestral")
-            plt.ylabel("Consumo bimestral de electricidad (MWh)")
-            display(plt, target="electricityPlot1")
+            if(df_electricity["consume_mwh"].sum() > 0):
+                plt.figure(facecolor="#a9a9a9")
+                plt.plot(df_electricity["receipt"], df_electricity["consume_mwh"])
+                plt.title("Consumo anual de electricidad")
+                plt.xlabel("No. de recibo bimestral")
+                plt.ylabel("Consumo bimestral de electricidad (MWh)")
+                display(plt, target="electricityPlot1")
 
-            plt.clf()
-            plt.bar(df_electricity["receipt"], df_electricity["emission_tco2"])
-            plt.title("Emisión de carbono anual de electricidad")
-            plt.xlabel("Consumo de electricidad bimestral (MWh)")
-            plt.ylabel("Emisión bimestral de carbono (tco2)")
-            display(plt, target="electricityPlot2")
+                plt.clf()
+                plt.bar(df_electricity["receipt"], df_electricity["emission_tco2"])
+                plt.title("Emisión de carbono anual de electricidad")
+                plt.xlabel("Consumo de electricidad bimestral (MWh)")
+                plt.ylabel("Emisión bimestral de carbono (tco2)")
+                display(plt, target="electricityPlot2")
 
             Element("electricityFactorResult").write("{:.2f} tCO2".format(emissionResultElectricity))
+
+
             water_data = userData["waterResponses"]["records"]
             df_water = pd.DataFrame(water_data)
             df_water = df_water.rename(columns={"receiptNumber": "receipt", "m3Consumption":
@@ -117,25 +118,26 @@
             emissionResultWater = df_water["consume_m3"].sum() * emissionFactorWater
 
             plt.clf()
-            plt.plot(df_water["receipt"], df_water["consume_m3"])
-            plt.title("Consumo anual de agua")
-            plt.xlabel("No. de recibo bimestral")
-            plt.ylabel("Consumo bimestral de agua (m^3)")
-            display(plt, target="waterPlot1")
+            if(df_water["consume_m3"].sum() > 0):
+                plt.plot(df_water["receipt"], df_water["consume_m3"])
+                plt.title("Consumo anual de agua")
+                plt.xlabel("No. de recibo bimestral")
+                plt.ylabel("Consumo bimestral de agua (m^3)")
+                display(plt, target="waterPlot1")
 
-            plt.clf()
-            plt.bar(df_water["receipt"], df_water["emission_tco2"])
-            plt.title("Emisión de carbono anual de agua")
-            plt.xlabel("Consumo de agua bimestral (m^3)")
-            plt.ylabel("Emisión bimestral de carbono (tco2)")
-            display(plt, target="waterPlot2")
+                plt.clf()
+                plt.bar(df_water["receipt"], df_water["emission_tco2"])
+                plt.title("Emisión de carbono anual de agua")
+                plt.xlabel("Consumo de agua bimestral (m^3)")
+                plt.ylabel("Emisión bimestral de carbono (tco2)")
+                display(plt, target="waterPlot2")
 
             Element("waterFactorResult").write("{:.2f} tCO2".format(emissionResultWater))
+
+
             gas_data = userData["gasResponses"]
             df_gas = pd.DataFrame([gas_data])
-            df_gas = df_gas.rename(columns={"naturalGasConsumption": "consume_natural_gas",
-            "LPGConsumption":
-            "consume_lp_gas"})
+            df_gas = df_gas.rename(columns={"naturalGasConsumption": "consume_natural_gas", "LPGConsumption": "consume_lp_gas"})
 
             emissionFactorNaturalGas = 2.2161 / 1000
             emissionFactorLPGas = 2.5868 / 1000
@@ -149,21 +151,23 @@
             lblsGas = ["Gas Natural", "Gas LP"]
 
             plt.clf()
-            gasVals = list(df_gas["consume_natural_gas"]) + list(df_gas["consume_lp_gas"])
-            plt.pie(gasVals, labels=lblsGas, autopct="%1.1f%%")
-            plt.title("Consumo anual de gas")
-            display(plt, target="gasPlot1")
+            if(df_gas["consume_natural_gas"].sum() + df_gas["consume_lp_gas"].sum() > 0):
+                gasVals = np.append(list(df_gas["consume_natural_gas"]), list(df_gas["consume_lp_gas"]))
+                plt.pie(gasVals, labels=lblsGas, autopct="%1.1f%%")
+                plt.title("Consumo anual de gas")
+                display(plt, target="gasPlot1")
 
-            plt.clf()
-            gasEmissionVals = list(df_gas["emission_tco2_natural_gas"]) + list(df_gas["emission_tco2_lp_gas"])
-            plt.bar(lblsGas, gasEmissionVals)
-            plt.title("Emisión de carbono anual de gas")
-            plt.xlabel("Tipo de gas")
-            plt.ylabel("Emisión de carbono (tco2)")
-            display(plt, target="gasPlot2")
+                plt.clf()
+                gasEmissionVals = np.append(list(df_gas["emission_tco2_natural_gas"]), list(df_gas["emission_tco2_lp_gas"]))
+                plt.bar(lblsGas, gasEmissionVals)
+                plt.title("Emisión de carbono anual de gas")
+                plt.xlabel("Tipo de gas")
+                plt.ylabel("Emisión de carbono (tco2)")
+                display(plt, target="gasPlot2")
 
             Element("naturalGasFactorResult").write("{:.2f} tCO2".format(emissionResultNaturalGas))
             Element("LPGasFactorResult").write("{:.2f} tCO2".format(emissionResultLPGas))
+
 
             transport_data = userData["transportResponses"]["vehicles"]
             df_transport = pd.DataFrame(transport_data)
@@ -182,19 +186,38 @@
             emissionResultTransport = df_transport["emission_tco2"].sum()
 
             plt.clf()
-            lblsTransport = [i for i in range(1, len(df_transport["noVehicle"])+1)]
-            plt.bar(lblsTransport, df_transport["emission_tco2"])
-            plt.title("Emisión de carbono anual de transporte")
-            plt.xticks(lblsTransport)
-            plt.xlabel("Carros")
-            plt.ylabel("Emisión de carbono (tco2)")
-            display(plt, target="transportPlot")
+            if(df_transport["efficiency"].sum() + df_transport["kmsDriven"].sum() > 0):
+                lblsTransport = [i for i in range(1, len(df_transport["noVehicle"])+1)]
+                plt.bar(lblsTransport, df_transport["emission_tco2"])
+                plt.title("Emisión de carbono anual de transporte")
+                plt.xticks(lblsTransport)
+                plt.xlabel("Carros")
+                plt.ylabel("Emisión de carbono (tco2)")
+                display(plt, target="transportPlot")
 
             Element("transportFactorResult").write("{:.2f} tCO2".format(emissionResultTransport))
 
+
             plt.clf()
-            emissionResults = [emissionResultElectricity, emissionResultNaturalGas, emissionResultLPGas, emissionResultWater, emissionResultTransport]
-            lblsResults = ["Electricidad", "Gas Natural", "Gas LP", "Agua", "Transporte"]
+            emissionResults = [] 
+            lblsResults = []
+
+            if(emissionResultElectricity > 0):
+                emissionResults.append(emissionResultElectricity)
+                lblsResults.append("Electricidad")
+            if(emissionResultNaturalGas > 0):
+                emissionResults.append(emissionResultNaturalGas)
+                lblsResults.append("Gas Natural")
+            if(emissionResultLPGas > 0):
+                emissionResults.append(emissionResultLPGas)
+                lblsResults.append("Gas LP")
+            if(emissionResultWater > 0):
+                emissionResults.append(emissionResultWater)
+                lblsResults.append("Agua")
+            if(emissionResultTransport > 0):
+                emissionResults.append(emissionResultTransport)
+                lblsResults.append("Transporte")
+
             plt.figure(figsize=(10,10), facecolor="#a9a9a9")
             plt.pie(emissionResults, labels=lblsResults, autopct="%1.1f%%")
             plt.title("Emisiones de carbono")
