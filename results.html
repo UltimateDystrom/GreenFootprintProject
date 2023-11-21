@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         body {
             background-color: #22663f;
@@ -226,11 +227,11 @@
             emissionUserResult = emissionResultElectricity + emissionResultWater + emissionResultNaturalGas + emissionResultLPGas + emissionResultTransport
             Element("userFactorResult").write("{:.2f} tCO2".format(emissionUserResult))
         </py-script>
-        <h1 style="text-align: center;" data-aos="zoom-in">¡Aquí están tus resultados!</h1>
+        <h1 style="text-align: center; color: white;" data-aos="zoom-in" data-aos-duration="1000">¡Aquí están tus resultados!</h1>
 
         <div class="centered-content">
 
-            <div class="card text-center" id="electricity-card" data-aos="fade-right">
+            <div class="card text-center" id="electricity-card" data-aos="fade-right" data-aos-duration="1000">
                 <div class="card-header">
                     Electricidad
                 </div>
@@ -247,7 +248,7 @@
             </div>
         </div>
         <div class="centered-content">
-            <div class="card text-center" id="electricity-card" data-aos="fade-left">
+            <div class="card text-center" id="electricity-card" data-aos="fade-left" data-aos-duration="1000">
                 <div class="card-header">
                     Agua
                 </div>
@@ -264,7 +265,7 @@
             </div>
         </div>
         <div class="centered-content">
-            <div class="card text-center" id="electricity-card" data-aos="fade-right">
+            <div class="card text-center" id="electricity-card" data-aos="fade-right" data-aos-duration="1000">
                 <div class="card-header">
                     Gas
                 </div>
@@ -283,7 +284,7 @@
             </div>
         </div>
         <div class="centered-content">
-            <div class="card text-center" id="electricity-card" data-aos="fade-left">
+            <div class="card text-center" id="electricity-card" data-aos="fade-left" data-aos-duration="1000">
                 <div class="card-header">
                     Transporte
                 </div>
@@ -299,7 +300,7 @@
         </div>
 
         <div class="centered-content">
-            <div class="card text-center" id="electricity-card" data-aos="fade-right">
+            <div class="card text-center" id="electricity-card" data-aos="fade-right" data-aos-duration="1000">
                 <div class="card-header">
                     General
                 </div>
@@ -326,6 +327,10 @@
             });
         </script>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

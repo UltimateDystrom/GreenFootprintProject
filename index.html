@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>Home</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var navbarContainer = document.getElementById("navbarContainer");
@@ -33,7 +34,7 @@
     <header class="masthead" style="background-image: url('assets/img/wallpaper.jpg');">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-heading text-uppercase"><span>Descubre tu impacto ambiental</span></div>
+                <div class="intro-heading text-uppercase" data-aos="fade-down" data-aos-duration="3000"><span>Descubre tu impacto ambiental</span></div>
             </div>
         </div>
     </header>
@@ -41,7 +42,7 @@
     <!----------------- ABOUT  ------------------>
 
     <section id="about">
-        <div class="container">
+        <div class="container" data-aos="zoom-in" data-aos-duration="1000">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="text-uppercase">Acerca</h2>
@@ -87,7 +88,7 @@
     <!----------------- TEST  ------------------>
 
     <section class="bg-light" id="test" style="background-image: url('assets/img/Balcony\ Screen\ Yellow\ 90x400\ cm\ Oxford\ Fabric.jpg');">
-        <div class="container">
+        <div class="container" data-aos="zoom-in" data-aos-duration="1000">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="text-uppercase section-heading">TEST</h2>
@@ -250,6 +251,10 @@
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/agency.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
