@@ -164,17 +164,17 @@
 
                     <div style="text-align: center; padding-bottom: 10px;">
                         <div class="d-flex justify-content-center align-items-center">
-                            <input class="form-control" id="water1" style="width: 85px;" placeholder="m3 | L (#1)">
-                            <input class="form-control" id="water2" style="width: 85px;" placeholder="m3 | L (#2)">
-                            <input class="form-control" id="water3" style="width: 85px;" placeholder="m3 | L (#3)">
+                            <input class="form-control" id="water1" style="width: 110px;" placeholder="m3 | L (#1)">
+                            <input class="form-control" id="water2" style="width: 110px;" placeholder="m3 | L (#2)">
+                            <input class="form-control" id="water3" style="width: 110px;" placeholder="m3 | L (#3)">
                         </div>
                     </div>
 
                     <div style="text-align: center;">
                         <div class="d-flex justify-content-center align-items-center">
-                            <input class="form-control" id="water4" style="width: 85px;" placeholder="m3 | L (#4)">
-                            <input class="form-control" id="water5" style="width: 85px;" placeholder="m3 | L (#5)">
-                            <input class="form-control" id="water6" style="width: 85px;" placeholder="m3 | L (#6)">
+                            <input class="form-control" id="water4" style="width: 110px;" placeholder="m3 | L (#4)">
+                            <input class="form-control" id="water5" style="width: 110px;" placeholder="m3 | L (#5)">
+                            <input class="form-control" id="water6" style="width: 110px;" placeholder="m3 | L (#6)">
                         </div>
                     </div>
 
@@ -525,56 +525,82 @@
             // CAPTURA DE DATOS
 
             document.getElementById('guardar').addEventListener('click', function () {
-                const userData = {
-                    "electricityResponses": { "records": [] },
-                    "waterResponses": { "records": [] },
-                    "gasResponses": {},
-                    "transportResponses": { "vehicles": [] }
-                };
-                console.log("holi")
 
+                let a1 = document.getElementById('electricity1').value;
+                let a2 = document.getElementById('electricity2').value;
+                let a3 = document.getElementById('electricity3').value;
+                let a4 = document.getElementById('electricity4').value;
+                let a5 = document.getElementById('electricity5').value;
+                let a6 = document.getElementById('electricity6').value;
+                let a7 = document.getElementById('water1').value;
+                let a8 = document.getElementById('water2').value;
+                let a9 = document.getElementById('water3').value;
+                let a10 = document.getElementById('water4').value;
+                let a11 = document.getElementById('water5').value;
+                let a12 = document.getElementById('water6').value;
 
-                // Captura los datos de Electricidad
-                for (let i = 1; i <= 6; i++) {
-                    userData.electricityResponses.records.push({
-                        "receiptNumber": i,
-                        "kWhConsumption": parseInt(document.getElementById('electricity' + i).value) || 0
-                    });
-                }
+                if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || a6 === '' || 
+                a7 === '' || a8 === '' || a9 === '' || a10 === '' || a11 === '' || a12 === '' ) {
 
-                // Captura los datos de Agua
-                for (let i = 1; i <= 6; i++) {
-                    userData.waterResponses.records.push({
-                        "receiptNumber": i,
-                        "m3Consumption": parseInt(document.getElementById('water' + i).value) || 0
-                    });
-                }
+                    alert("Por favor, rellena los datos que se piden" )
 
-                //Captura los datos de Gas
-                userData.gasResponses.naturalGasConsumption = parseInt(document.getElementById('naturalGas').value) || 0;
-                userData.gasResponses.LPGConsumption = parseInt(document.getElementById('lpg').value) || 0;
+                } else if (a1 < 0 || a2 < 0 || a3 < 0 || a4 < 0 || a5 < 0 || a6 < 0 || a7 < 0 || 
+                a8 < 0 || a9 < 0 || a10 < 0 || a11 < 0 || a12 < 0) {
 
+                    alert("Haz uso de números enteros positivos (no permitimos uso de negativos)")
 
-                // Captura los datos de Transporte
-                var numVehicles = parseInt(document.getElementById('numVehicles').value);
+                } else {
 
-                for (let i = 1; i <= numVehicles; i++) {
-                    var fuelType = document.getElementById('fuelType' + i).value === 'd'; // true si es diésel, false si no
-                    var annualConsumption = parseInt(document.getElementById('annualConsumption' + i).value) || 0;
-                    var fuelConsumptionPerKm = parseFloat(document.getElementById('fuelConsumptionPerKm' + i).value) || 0;
+                    const userData = {
+                        "electricityResponses": { "records": [] },
+                        "waterResponses": { "records": [] },
+                        "gasResponses": {},
+                        "transportResponses": { "vehicles": [] }
+                    };
 
-                    userData.transportResponses.vehicles.push({
-                        "noVehicle": i,
-                        "isDiesel": fuelType,
-                        "kmsDriven": annualConsumption,
-                        "efficiency": fuelConsumptionPerKm
-                    });
-                }
+                    // Captura los datos de Electricidad
+                    for (let i = 1; i <= 6; i++) {
+                        userData.electricityResponses.records.push({
+                            "receiptNumber": i,
+                            "kWhConsumption": parseInt(document.getElementById('electricity' + i).value) || 0
+                        });
+                    }
 
-                const userDataJSON = JSON.stringify(userData);
+                    // Captura los datos de Agua
+                    for (let i = 1; i <= 6; i++) {
+                        userData.waterResponses.records.push({
+                            "receiptNumber": i,
+                            "m3Consumption": parseInt(document.getElementById('water' + i).value) || 0
+                        });
+                    }
+
+                    //Captura los datos de Gas
+                    userData.gasResponses.naturalGasConsumption = parseInt(document.getElementById('naturalGas').value) || 0;
+                    userData.gasResponses.LPGConsumption = parseInt(document.getElementById('lpg').value) || 0;
+
+                    // Captura los datos de Transporte
+                    var numVehicles = parseInt(document.getElementById('numVehicles').value);
+
+                    for (let i = 1; i <= numVehicles; i++) {
+                        var fuelType = document.getElementById('fuelType' + i).value === 'd'; // true si es diésel, false si no
+                        var annualConsumption = parseInt(document.getElementById('annualConsumption' + i).value) || 0;
+                        var fuelConsumptionPerKm = parseFloat(document.getElementById('fuelConsumptionPerKm' + i).value) || 0;
+
+                        userData.transportResponses.vehicles.push({
+                            "noVehicle": i,
+                            "isDiesel": fuelType,
+                            "kmsDriven": annualConsumption,
+                            "efficiency": fuelConsumptionPerKm
+                        });
+                    }
+
+                    const userDataJSON = JSON.stringify(userData);
                 console.log("hola");
                 console.log(userDataJSON);
                 window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
+
+                }
+
             });
 
 
