@@ -48,9 +48,12 @@
             background-color: white;
         }
 
-        .card {
-            margin: 0 auto;
-            max-width: 400px;
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -80,13 +83,13 @@
             <div class="container">
                 <div class="intro-text">
                     <div class="intro-heading text-uppercase" style="color: #22663f;" data-aos="fade-down"
-                        data-aos-duration="1000">Calcula tu Huella de
-                        Carbono</div>
+                        data-aos-duration="1000">Calcula tu Huella de Carbono
+                    </div>
 
                     <div class="container mt-5" style="margin-left: 430px; overflow-x: auto;">
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-md-offset-4">
                                 <div class="card" data-aos="flip-up" data-aos-duration="1000">
                                     <div class="card-body">
                                         <p style="text-align: justify;">Calcular la huella de carbono de un individuo
@@ -164,17 +167,17 @@
 
                     <div style="text-align: center; padding-bottom: 10px;">
                         <div class="d-flex justify-content-center align-items-center">
-                            <input class="form-control" id="water1" style="width: 110px;" placeholder="m3 | L (#1)">
-                            <input class="form-control" id="water2" style="width: 110px;" placeholder="m3 | L (#2)">
-                            <input class="form-control" id="water3" style="width: 110px;" placeholder="m3 | L (#3)">
+                            <input class="form-control" id="water1" style="width: 110px;" placeholder="m3 (#1)">
+                            <input class="form-control" id="water2" style="width: 110px;" placeholder="m3 (#2)">
+                            <input class="form-control" id="water3" style="width: 110px;" placeholder="m3 (#3)">
                         </div>
                     </div>
 
                     <div style="text-align: center;">
                         <div class="d-flex justify-content-center align-items-center">
-                            <input class="form-control" id="water4" style="width: 110px;" placeholder="m3 | L (#4)">
-                            <input class="form-control" id="water5" style="width: 110px;" placeholder="m3 | L (#5)">
-                            <input class="form-control" id="water6" style="width: 110px;" placeholder="m3 | L (#6)">
+                            <input class="form-control" id="water4" style="width: 110px;" placeholder="m3 (#4)">
+                            <input class="form-control" id="water5" style="width: 110px;" placeholder="m3 (#5)">
+                            <input class="form-control" id="water6" style="width: 110px;" placeholder="m3 (#6)">
                         </div>
                     </div>
 
@@ -200,13 +203,13 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <p>Consumo anual de Gas Natural (en L):</p>
                             <input class="form-control" id="naturalGas" style="width: 85px; margin: 10px;"
-                                placeholder="L (Año)" value="0">
+                                placeholder="L (Año)">
                         </div>
 
                         <div class="d-flex justify-content-center align-items-center">
                             <p>Consumo anual de Gas LP (en L):</p>
                             <input class="form-control" id="lpg" style="width: 85px; margin: 10px;"
-                                placeholder="L (Año)" value="0">
+                                placeholder="L (Año)">
                         </div>
                     </div>
 
@@ -279,11 +282,11 @@
                             </div>
                         </div>
 
-                        <p>Consumo anual de gasolina en litros:</p>
+                        <p>Recorrido anual de kilómetros:</p>
                         <div style="text-align: center;">
                             <div class="d-flex justify-content-center align-items-center">
                                 <input class="form-control" id="annualConsumption1" style="width: 60px;"
-                                    placeholder="L (Año)">
+                                    placeholder="Km (Año)">
                             </div>
                         </div>
 
@@ -326,11 +329,11 @@
                             </div>
                         </div>
 
-                        <p>Consumo anual de gasolina en litros:</p>
+                        <p>Recorrido anual de kilómetros:</p>
                         <div style="text-align: center;">
                             <div class="d-flex justify-content-center align-items-center">
                                 <input class="form-control" id="annualConsumption2" style="width: 60px;"
-                                    placeholder="L (Año)">
+                                    placeholder="Km (Año)">
                             </div>
                         </div>
 
@@ -372,11 +375,11 @@
                             </div>
                         </div>
 
-                        <p>Consumo anual de gasolina en litros:</p>
+                        <p>Recorrido anual de kilómetros:</p>
                         <div style="text-align: center;">
                             <div class="d-flex justify-content-center align-items-center">
                                 <input class="form-control" id="annualConsumption3" style="width: 60px;"
-                                    placeholder="L (Año)">
+                                    placeholder="Km (Año)">
                             </div>
                         </div>
 
@@ -415,11 +418,11 @@
                             </div>
                         </div>
 
-                        <p>Consumo anual de gasolina en litros:</p>
+                        <p>Recorrido anual de kilómetros:</p>
                         <div style="text-align: center;">
                             <div class="d-flex justify-content-center align-items-center">
                                 <input class="form-control" id="annualConsumption4" style="width: 60px;"
-                                    placeholder="L (Año)">
+                                    placeholder="Km (Año)">
                             </div>
                         </div>
 
@@ -459,11 +462,11 @@
                             </div>
                         </div>
 
-                        <p>Consumo anual de gasolina en litros:</p>
+                        <p>Recorrido anual de kilómetros:</p>
                         <div style="text-align: center;">
                             <div class="d-flex justify-content-center align-items-center">
                                 <input class="form-control" id="annualConsumption5" style="width: 60px;"
-                                    placeholder="L (Año)">
+                                    placeholder="Km (Año)">
                             </div>
                         </div>
 
@@ -539,13 +542,13 @@
                 let a11 = document.getElementById('water5').value;
                 let a12 = document.getElementById('water6').value;
 
-                if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || a6 === '' || 
-                a7 === '' || a8 === '' || a9 === '' || a10 === '' || a11 === '' || a12 === '' ) {
+                if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || a6 === '' ||
+                    a7 === '' || a8 === '' || a9 === '' || a10 === '' || a11 === '' || a12 === '') {
 
-                    alert("Por favor, rellena los datos que se piden" )
+                    alert("Por favor, rellena los datos que se piden")
 
-                } else if (a1 < 0 || a2 < 0 || a3 < 0 || a4 < 0 || a5 < 0 || a6 < 0 || a7 < 0 || 
-                a8 < 0 || a9 < 0 || a10 < 0 || a11 < 0 || a12 < 0) {
+                } else if (a1 < 0 || a2 < 0 || a3 < 0 || a4 < 0 || a5 < 0 || a6 < 0 || a7 < 0 ||
+                    a8 < 0 || a9 < 0 || a10 < 0 || a11 < 0 || a12 < 0) {
 
                     alert("Haz uso de números enteros positivos (no permitimos uso de negativos)")
 
@@ -595,9 +598,9 @@
                     }
 
                     const userDataJSON = JSON.stringify(userData);
-                console.log("hola");
-                console.log(userDataJSON);
-                window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
+                    console.log("hola");
+                    console.log(userDataJSON);
+                    window.location.href = 'results.html?respuestas=' + encodeURIComponent(userDataJSON);
 
                 }
 
@@ -627,8 +630,8 @@
 
 
                 for (var i = 1; i <= 5; i++) {
-                    document.getElementById('annualConsumption' + i).value = 0;
-                    document.getElementById('fuelConsumptionPerKm' + i).value = 0;
+                    // document.getElementById('annualConsumption' + i).value = 0;
+                    // document.getElementById('fuelConsumptionPerKm' + i).value = 0;
                     document.getElementById('vehicle' + i).style.display = 'none';
                 }
 
