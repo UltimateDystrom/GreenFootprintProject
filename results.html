@@ -85,7 +85,6 @@
             urlParams = URLSearchParams.new(location.search)
             userDataJSON = urlParams.get('respuestas')
             userData = json.loads(userDataJSON)
-            print(userData)
             electricity_data = userData["electricityResponses"]["records"]
             df_electricity = pd.DataFrame(electricity_data)
             df_electricity = df_electricity.rename(columns={"receiptNumber": "receipt",
@@ -196,7 +195,6 @@
             df_transport["emission_tco2"] = df_transport.apply(calculate_emission, axis=1)
             emissionResultTransport = df_transport["emission_tco2"].sum()
 
-            print(df_transport)
             plt.clf()
             if(df_transport["efficiency"].sum() + df_transport["kmsDriven"].sum() > 0):
                 lblsTransport = [i for i in range(1, len(df_transport["noVehicle"])+1)]
